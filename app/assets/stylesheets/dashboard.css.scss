@@ -1,0 +1,53 @@
+.dashboard-sidebar {
+  p.description {
+    border-top: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+    margin: 0;
+    background-color: #ffffe0;
+  }
+
+  .issue-count {
+    position: relative;
+    float: right;
+  }
+}
+
+.top-bar {
+  @include background-image(linear-gradient(#fafafa, #eaeaea));
+  border-top: 1px solid #ddd;
+  padding: 5px 5px 5px 10px;
+
+  &:first-child { border-top: none; }
+
+  h2 {
+    margin: 0px;
+    padding: 5px;
+    font-size: 14px;
+    line-height: 14px;
+    display: inline;
+    color: #555;
+
+    em {
+      color: #aaa;
+    }
+  }
+}
+
+ul.nav-list {
+  padding: 0;
+  li {
+    border-top: 1px solid #ddd;
+
+    a {
+      padding: 0;
+      margin: 0;
+      display: block;
+      padding: 5px 15px;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+<% if @sprint %>
+  <div class="options">
+    <%= finish_button if is_collaborator? %>
+    <div class="pull-right">
+      <%= content_tag :span, "#{@sprint.start_date.to_formatted_s(:short)} - #{@sprint.end_date.to_formatted_s(:short)}" %>
+      <% if is_collaborator? %>
+      | <%= burn_down_link %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="board" data-collab="<%= is_collaborator? %>">
+    <div class="row-fluid">
+    <div class="span4">
+      <div class="well">
+        <h3>To Do</h3>
+        <ul class="work-items sortable connected" data-state="todo">
+          <%= render :partial => 'sprints/work_item', :collection => @sprint.issues.to_do %>
+        </ul>
+        <%= render :partial => "drag_information" if is_collaborator? %>
+      </div>
+    </div>
+
+    <div class="span4">
+      <div class="well">
+        <h3>In Progress</h3>
+        <ul class="work-items sortable connected" data-state="progress">
+          <%= render :partial => 'sprints/work_item', :collection => @sprint.issues.in_progress %>
+        </ul>
+        <%= render :partial => "drag_information" if is_collaborator? %>
+      </div>
+    </div>
+
+    <div class="span4">
+      <div class="well">
+        <h3>Done</h3>
+        <ul class="work-items sortable connected" data-state="done">
+          <%= render :partial => 'sprints/work_item', :collection => @sprint.issues.closed %>
+        </ul>
+        <%= render :partial => "drag_information" if is_collaborator? %>
+      </div>
+    </div>
+    </div>
+  </div>
+<% else %>
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="well centered">
+        <p>There is currently no active sprint.</p>
+      </div>
+    </div>
+  </div>
+<% end %>

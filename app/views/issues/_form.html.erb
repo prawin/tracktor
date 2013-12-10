@@ -1,0 +1,27 @@
+<%= simple_form_for(issue, :url => url, :validate => true) do |f| %>
+  <table>
+    <tr>
+      <td colspan="2"><%= f.input :summary, :autofocus => true, :label => false, :placeholder => "Type to enter your issue summary", :input_html => { :class => "form-issue-summary" } %></td>
+    </tr>
+    <tr>
+      <td class="half"><%= f.association :issue_type, :prompt => false %></td>
+      <td><%= f.association :issue_priority, :prompt => false %></td>
+    </tr>
+    <tr>
+      <td class="half"><%= f.association :assigned_to, :collection => users_to_assign(issue) %></td>
+      <td class="half"><%= f.input :estimate %></td>
+    </tr>
+    <tr>
+      <td colspan="2"><%= f.input :description, :hint => "Markdown enabled", :input_html => {:class => 'growable'} %></td>
+    </tr>
+  </table>
+
+  <%= f.button :submit, :class => "btn" %>
+
+  <% if issue.new_record? %>
+    <div class="create-another-issue checkbox">
+      <%= f.input_field :create_another, :value => true, :type => :checkbox, :id => :create_another, :checked => @template %>
+      <%= f.label "Create another", :for => :create_another %>
+    </div>
+  <% end %>
+<% end %>

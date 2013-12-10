@@ -1,0 +1,29 @@
+<div class="span3 dashboard-sidebar">
+  <div class="well no-padding">
+    <div class="top-bar">
+      <h2>Your projects <em>(<%= @accessible_projects.count %>)</em></h2>
+    </div>
+    <ul class="nav nav-list">
+      <%= render :partial => "project", :collection => @accessible_projects %>
+    </ul>
+    <p class="description"><%= link_to "Create", new_project_path %> a new project.</p>
+    <div class="top-bar">
+      <h2>Most active projects</h2>
+    </div>
+    <ul class="nav nav-list">
+      <%= render :partial => "project", :collection => @most_active_projects %>
+    </ul>
+  </div>
+</div>
+
+<div class="span9">
+  <div class="well" data-cell="Tutorial" data-tutorial-id="dashboard">
+    <div class="activities-anchor"></div>
+    <table class="Activities">
+      <tbody>
+        <%= render :partial => "audit", :collection => @audits %>
+        <%= content_tag :p, t("misc.no_recent_activity") if @audits.count == 0 %>
+      </tbody>
+    </table>
+  </div>
+</div>

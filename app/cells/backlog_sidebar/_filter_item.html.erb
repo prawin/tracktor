@@ -1,0 +1,7 @@
+<ul class="filter" data-filter="<%= field[0] %>">
+  <%= filter_option_all(f, field[0]) %>
+
+  <% field[1].each do |option| %>
+    <%= filter_option(f, field[0], option) %>
+  <% end %>
+</ul>

@@ -1,0 +1,9 @@
+development:
+  adapter: postgresql
+  database: tyne_pmt
+  host: localhost
+  username: postgres
+  pool: 5
+  timeout: 5000
+
+

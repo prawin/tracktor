@@ -1,0 +1,33 @@
+<div class="span3 backlog-sidebar">
+  <div class="well">
+    <%= render_cell :backlog_sidebar, :search, @default_filter %>
+    <%= render_cell :backlog_sidebar, :filter, @project %>
+  </div>
+</div>
+
+<div class="span9">
+  <div data-cell="Backlog">
+    <div class="options">
+      <%= link_to t("actions.create"), new_issue_path, :class => "btn btn-small new-issue-link" if current_user %>
+      <%= link_to content_tag(:i, '', :class => "icon-refresh"), main_app.issues_path(:format => :pjax), :class => "btn btn-small btn-refresh", :title => t("actions.refresh") %>
+      <div class="btn-group" data-toggle="buttons-radio" data-behaviour="issue-view">
+        <button type="button" class="btn btn-small" data-view="minimal" title="<%= t("actions.list_view") %>"><i class="icon-minus"></i></button>
+        <button type="button" class="btn btn-small active" data-view="detailed" title="<%= t("actions.detail_view") %>"><i class="icon-tasks"></i></button>
+      </div>
+      <div class="pull-right">
+        <%= render_cell :backlog_sidebar, :sorting %>
+      </div>
+      <div class="pull-right">
+        <%= render_cell :backlog_sidebar, :query %>
+      </div>
+    </div>
+
+    <%= content_tag :div, '', :data => {:cell => 'Tutorial', 'tutorial-id' => 'backlog'} if @project.user == current_user  %>
+    <div class="issue-list issue-detailed">
+      <table>
+        <%= render @issues %>
+      </table>
+      <%= render_cell :pagination, :show, :collection => @issues, :total => @total, :current_page => @current_page, :page_count => @page_count, :page_size => @page_size %>
+    </div>
+  </div>
+</div>
