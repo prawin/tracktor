@@ -2,7 +2,7 @@
 module ApplicationHelper
   # Returns the brand name wrapped in a span
   def brand
-    result = content_tag(:span, "Tyne", :class => "brand-name")
+    result = content_tag(:span, "Tracktor", :class => "brand-name")
     result.html_safe
   end
 
