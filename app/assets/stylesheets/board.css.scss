@@ -68,7 +68,7 @@
       }
 
       .work-item-content {
-        height: 50px;
+        height: auto;
 
         @include background-image(linear-gradient(#fff, #f8f8f8));
 
