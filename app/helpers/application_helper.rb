@@ -17,7 +17,7 @@ module ApplicationHelper
 
     title = I18n.t("titles.#{controller.controller_name}.#{params[:action]}", options)
 
-    "#{title} - Tyne"
+    "#{title} - Tracktor"
   end
 
   # Converts the given markup into html.
