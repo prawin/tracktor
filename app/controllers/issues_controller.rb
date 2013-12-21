@@ -10,9 +10,9 @@ class IssuesController < ApplicationController
 
   before_filter :load_user
   before_filter :load_project
-  before_filter :require_login, :only => [:new, :create, :edit, :update, :workflow, :upvote, :downvote, :assign_to_me]
-  before_filter :load_issue, :only => [:workflow, :edit, :update, :show, :upvote, :downvote, :assign_to_me]
-  before_filter :ensure_can_edit, :only => [:workflow, :edit, :update, :assign_to_me]
+  before_filter :require_login, :only => [:new, :create, :edit, :update, :workflow, :upvote, :downvote, :assign_to_me, :assign_to_user]
+  before_filter :load_issue, :only => [:workflow, :edit, :update, :show, :upvote, :downvote, :assign_to_me, :assign_to_user]
+  before_filter :ensure_can_edit, :only => [:workflow, :edit, :update, :assign_to_me, :assign_to_user]
 
   helper :labels
 
@@ -103,6 +103,13 @@ class IssuesController < ApplicationController
   # Assign issue to me
   def assign_to_me
     @issue.assigned_to = current_user
+    @issue.save
+    respond_with(@issue, :location => show_path)
+  end
+
+  # Assign issue to user
+  def assign_to_user
+    @issue.assigned_to = User.find_by_id(params[:id])
     @issue.save
     respond_with(@issue, :location => show_path)
   end

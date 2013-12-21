@@ -30,6 +30,7 @@ Tyne::Application.routes.draw do
         post :upvote
         post :downvote
         post :assign_to_me
+        put :assign_to_user
       end
 
       resources :comments

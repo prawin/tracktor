@@ -33,6 +33,19 @@
         </ul>
       </div>
       <%= link_to t("actions.assign_to_me"), main_app.assign_to_me_issue_path(:user => @issue.project.user.username, :key => @issue.project.key, :id => @issue.number), :class => 'btn btn-small', :method => :post %>
+
+      <div class="btn-group">
+        <%#= default_action(@issue) %>
+        <a class="btn btn-small" href="javascript:void(0);">Assign To</a>
+        <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <% users_to_assign(@issue).each do |user| %>
+            <li><%= link_to user.name, assign_to_user_issue_url(:user => @issue.project.user.username, :key => @issue.project.key, :id => @issue.number), :method => :put %></li>
+          <% end %>
+        </ul>
+      </div>
       <% end %>
     </div>
 
@@ -48,6 +61,7 @@
     <p class="tag-list">
       <%= issue_type(@issue) %>
       <%= issue_priority(@issue) %>
+      <span class="issue-assigned_to tag" title="Assigned to"><%= @issue.assigned_to.try(:name) || t("issues.not_assigned") %></span>
       <%= issue_label(Issue.human_attribute_name(:estimate), @issue.estimate) if @issue.estimate %>
 
       <% @issue.labels.each do |label| %>
