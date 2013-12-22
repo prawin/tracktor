@@ -1,16 +1,35 @@
-<h2>Sign in</h2>
-
-<%= simple_form_for(resource, :as => resource_name, :url => user_session_path) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, :required => false, :autofocus => true %>
-    <%= f.input :password, :required => false %>
-    <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+<br/>
+<div class="container-fluid">
+  <div class="span4">    
+      <div class="top-bar">
+        <h2>Sign in</h2>
+      </div>
+      <div class="well">
+        <%= simple_form_for(resource, :as => resource_name, :url => user_session_path) do |f| %>
+          <div class="form-group">
+            <%= f.input :email, :required => false, :autofocus => true, :input_html => {:class => "form-control"} %>
+            <%= f.input :password, :required => false, :input_html => {:class => "form-control"} %>
+            <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+          </div>
+          <%= f.button :submit, "Sign in", :class => "btn btn-success" %>
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Sign in" %>
+  <div class="span8">
+    <div class="top-bar">
+      <h2>Whats New?</h2>
+    </div>
+    <div class="well">
+      <ul>
+        <% ReleaseUpdate.enabled.each do |u| %>
+          <li><%= u.info %> <small><i> - added on <%= u.created_at.strftime('%d %b, %Y') %></i></small></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+
+
 
