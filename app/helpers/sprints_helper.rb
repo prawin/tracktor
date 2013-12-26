@@ -21,9 +21,12 @@ module SprintsHelper
 
     options[:title] = title unless title.empty?
 
-    button_tag "Start", options
+    button_tag sprint_action(sprint), options
   end
 
+  def sprint_action sprint
+    sprint.active? ? "Current Sprint" : "Start"
+  end
   # Renders a button to finish the sprint. The action requires a confirmation.
   def finish_button
     finish_url = finish_sprint_path(:user => @sprint.project.user.username, :key => @sprint.project.key, :id => @sprint.id)

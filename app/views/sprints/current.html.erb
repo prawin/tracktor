@@ -1,6 +1,6 @@
 <% if @sprint %>
   <div class="options">
-    <%= finish_button if is_collaborator? %>
+    <%= finish_button if is_owner? %>
     <div class="pull-right">
       <%= content_tag :span, "#{@sprint.start_date.to_formatted_s(:short)} - #{@sprint.end_date.to_formatted_s(:short)}" %>
       <% if is_collaborator? %>

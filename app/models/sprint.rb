@@ -14,6 +14,8 @@ class Sprint < ActiveRecord::Base
 
   scope :not_running, where(:active => false, :finished => nil)
 
+  scope :in_progress, where(:finished => nil)
+
   # Starts the sprint. Only valid if there is no running sprint.
   def start(start_date, end_date)
     self.start_date = start_date

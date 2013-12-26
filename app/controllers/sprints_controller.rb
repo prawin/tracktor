@@ -14,7 +14,7 @@ class SprintsController < AdminController
   def index
     add_breadcrumb :planning
 
-    @sprints = @project.sprints.not_running
+    @sprints = @project.sprints.in_progress
     @issues = @project.backlog_items.not_completed.where(:sprint_id => nil)
   end
 
